@@ -8,7 +8,9 @@ var Product = require('./model/product');
 var WishList = require('./model/wishlist');
 
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extended: false}));
+app.use(bodyParser.urlencoded({
+  extended: false
+}));
 
 app.post('/product', function(request, response) {
   var product = new Product();
@@ -16,7 +18,9 @@ app.post('/product', function(request, response) {
   product.price = request.body.price;
   product.save(function(err, savedProduct) {
     if (err) {
-      response.status(500).send({error:"Could not save product"});
+      response.status(500).send({
+        error: "Could not save product"
+      });
     } else {
       response.status(200).send(savedProduct);
     }
@@ -26,7 +30,9 @@ app.post('/product', function(request, response) {
 app.get('/product', function(request, response) {
   Product.find({}, function(err, products) {
     if (err) {
-      response.status(500).send({error:"Could not fetch products"});
+      response.status(500).send({
+        error: "Could not fetch products"
+      });
     } else {
       response.send(products);
     }
