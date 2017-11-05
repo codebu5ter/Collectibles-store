@@ -9,18 +9,34 @@ const http = new HttpService();
 class App extends Component {
   constructor(props) {
     super(props);
+
+    this.state = {products:[]};
+
     this.loadData = this.loadData.bind(this);
+    this.productList = this.productList.bind(this);
 
     this.loadData();
   }
 
   loadData = () => {
+    var self = this;
     http.getProducts().then(products => {
-      console.log(products);
+      self.setState({products: data})
     }, err => {
 
     });
   }
+
+  productList = () => {
+    const list = this.state.products.map((product) =>
+      <div className="col-sm-4" key={product._id}>
+        <Product title={product.title} price={product.price} imgUrl={product.imgUrl} />
+      </div>
+    );
+
+    return (list);
+  }
+
   render() {
     return (
       <div className="App">
@@ -28,8 +44,10 @@ class App extends Component {
           <img src={logo} className="App-logo" alt="logo" />
           <h1 className="App-title">Welcome to React</h1>
         </header>
-        <div className="App-main">
-          <Product />
+        <div className="container App-main">
+          <div className="row">
+            {this.productList()}
+          </div>
         </div>
       </div>
     );
