@@ -6,12 +6,14 @@ import NotificationService, { NOTIF_WISHLIST_CHANGED } from '../services/notific
 import ProductCondensed from '../product-condensed/product-condensed';
 
 let ns = new NotificationService();
+
 class WishList extends Component {
 
   constructor(props) {
     super(props);
 
     this.state = {wishList:[]};
+
     //Bind functions
     this.createWishList = this.createWishList.bind(this);
     this.onWishListChanged = this.onWishListChanged.bind(this);
